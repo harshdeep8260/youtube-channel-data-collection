@@ -70,4 +70,4 @@ for i in range(0, len(video_ids), 50):
         details.append(video_info)
 
 df = pandas.DataFrame(details)
-df.to_parquet("data.parquet", engine = "pyarrow")
+df.to_parquet("data.parquet", engine = "pyarrow", index = None)
