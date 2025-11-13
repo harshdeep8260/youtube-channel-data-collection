@@ -21,6 +21,7 @@ uploads_playlist_id = response["items"][0]["contentDetails"]["relatedPlaylists"]
 video_ids = []
 next_page_token = None
 
+print("Collecting video IDs...")
 while True:
     request = youtube.playlistItems().list(
         maxResults = 50,
@@ -41,6 +42,7 @@ while True:
 
 details = []
 
+print("Collecting data...")
 for i in range(0, len(video_ids), 50):
     batch = video_ids[i:i+50]
     ids_string = ','.join(batch)
@@ -71,3 +73,4 @@ for i in range(0, len(video_ids), 50):
 
 df = pandas.DataFrame(details)
 df.to_parquet("data.parquet", engine = "pyarrow", index = None)
+print("Data saved in data.parquet.")
